@@ -7,7 +7,7 @@ timeouts = [ 1, 10, 50, 100, 200, 500, 750, 1000, 1500, 2000 ]
 
 class ThanosCommand(command.Command):
   def __init__(self,):
-    super.__init__(self, "thanos", 10.0, command.Permissions.viewers)
+    super().__init__("thanos", 10.0, command.Permissions.viewers)
     self.users = {}
 
   def run(self, client, user, msg):

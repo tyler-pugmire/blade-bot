@@ -11,6 +11,7 @@ class Permissions(Enum):
 
 class Command(ABC):
   def __init__(self, name, cooldown, permission):
+    super().__init__()
     self._name = name
     self._cooldown = cooldown
     self._last_use = 0

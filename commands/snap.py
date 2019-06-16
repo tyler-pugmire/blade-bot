@@ -4,8 +4,8 @@ import math
 import time
 
 class SnapCommand(command.Command):
-  def __init__(self,):
-    super.__init__(self, "snap", 0, command.Permissions.broadcaster)
+  def __init__(self):
+    super().__init__("snap", 0, command.Permissions.broadcaster)
 
   def run(self, client, user, msg):
     all_names = client.get_names()
