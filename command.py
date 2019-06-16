@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from enum import Enum
+from threading import Thread
+
 
 class Permissions(Enum):
   broadcaster = 0
@@ -13,17 +15,14 @@ class Command(ABC):
   def __init__(self, name, cooldown, permission):
     super().__init__()
     self._name = name
-    self._cooldown = timedelta(cooldown)
+    self._cooldown = timedelta(seconds=cooldown)
     self._last_use = datetime.min 
     self._permission = permission
     
   def try_run(self, client, user, msg):
     if not self.__on_cooldown and self.__has_permission(client, user):
       self._last_use = datetime.now()
-      return self.run(client, user, msg)
-    else:
-      client.send_message("command failed")
-      return None
+      Thread(target= self.run, args= (client, user, msg)).start()
 
   @abstractmethod
   def run(self, client, user, msg): pass

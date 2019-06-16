@@ -64,7 +64,7 @@ class TwitchClient:
       
       for line in temp:
         if "PING" in line:
-          self.s.send(line.replace("PING", "PONG"))
+          self.s.send(line.replace("PING", "PONG").encode("utf-8"))
           break
         elif "!QUIT!" in line:
           self.send_message("BYE!")
