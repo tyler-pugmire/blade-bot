@@ -74,11 +74,10 @@ class TwitchClient:
           username = re.search(r"\w+", line).group(0) # return the entire match
           message = CHAT_MSG.sub("", line)
           print(message)
-          if username == "tylerex":
-            if message.startswith("!"):
-              message = remove_prefix(message, "!")
-              split = message.split(" ")
-              self.commands[split[0]].try_run(self, username, split.pop())
+          if message.startswith("!"):
+            message = remove_prefix(message, "!")
+            split = message.split(" ")
+            self.commands[split[0]].try_run(self, username, split.pop())
   
   def register_command(self, cmd):
     self.commands[cmd._name] = cmd
