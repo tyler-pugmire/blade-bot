@@ -1,0 +1,2 @@
+code --disable-gpu
+exit
