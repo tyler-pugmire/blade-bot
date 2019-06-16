@@ -12,6 +12,9 @@ class ThanosCommand(command.Command):
 
   def run(self, client, user, msg):
     coin = random.randint(0, 1)
+    if not user in self.users:
+      self.users[user] = 0
+
     if(coin == 0):
       client.send_message("{} You have been PURGED! CRUMBLE TO ASHES!".format(user))
       client.timeout(user, timeouts[self.users[user]])

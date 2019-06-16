@@ -14,7 +14,7 @@ class Command(ABC):
     super().__init__()
     self._name = name
     self._cooldown = timedelta(cooldown)
-    self._last_use = datetime.now()
+    self._last_use = datetime.min 
     self._permission = permission
     
   def try_run(self, client, user, msg):
@@ -22,6 +22,7 @@ class Command(ABC):
       self._last_use = datetime.now()
       return self.run(client, user, msg)
     else:
+      client.send_message("command failed")
       return None
 
   @abstractmethod
@@ -45,5 +46,6 @@ class Command(ABC):
     elif self._permission == Permissions.viewers:
       return True
     else:
+      client.send_message("{} You don't have the permissions to use this command".format(user))
       return False
   
