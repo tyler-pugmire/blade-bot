@@ -19,6 +19,8 @@ class SnapCommand(command.Command):
       else:
         snapped.append(userToMove)
     
+    client.send_message("You should have gone for the head!")
+    
     for user in snapped:
       client.timeout(user, 1)
       time.sleep(1 / 30)

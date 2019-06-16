@@ -13,13 +13,13 @@ class Command(ABC):
   def __init__(self, name, cooldown, permission):
     super().__init__()
     self._name = name
-    self._cooldown = cooldown
-    self._last_use = 0
+    self._cooldown = timedelta(cooldown)
+    self._last_use = datetime.now()
     self._permission = permission
     
   def try_run(self, client, user, msg):
     if not self.__on_cooldown and self.__has_permission(client, user):
-      self._last_command_usage = datetime.now()
+      self._last_use = datetime.now()
       return self.run(client, user, msg)
     else:
       return None
