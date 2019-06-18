@@ -77,7 +77,8 @@ class TwitchClient:
           if message.startswith("!"):
             message = remove_prefix(message, "!")
             split = message.split(" ")
-            self.commands[split[0]].try_run(self, username, split.pop())
+            if split[0] in self.commands:
+              self.commands[split[0]].try_run(self, username, split.pop())
   
   def register_command(self, cmd):
     self.commands[cmd._name] = cmd
