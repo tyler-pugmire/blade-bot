@@ -58,7 +58,11 @@ class TwitchClient:
     CHAT_MSG = re.compile(r"^:\w+!\w+@\w+.tmi.twitch.tv PRIVMSG #\w+ :")
 
     while running:
-      readBuffer = readBuffer + self.s.recv(1024).decode("utf-8")
+      try:
+        readBuffer = readBuffer + self.s.recv(1024).decode("utf-8")
+      except KeyboardInterrupt:
+        pass
+      
       temp = readBuffer.split("\r\n")
       readBuffer = temp.pop()
       
