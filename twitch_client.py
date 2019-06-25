@@ -2,6 +2,7 @@ import socket
 import string
 import re
 import requests
+import traceback
 
 def remove_prefix(text, prefix):
     if text.startswith(prefix):
@@ -61,7 +62,9 @@ class TwitchClient:
       try:
         readBuffer = readBuffer + self.s.recv(1024).decode("utf-8")
       except KeyboardInterrupt:
-        pass
+        raise
+      except:
+        print(traceback.format_exc())
       
       temp = readBuffer.split("\r\n")
       readBuffer = temp.pop()
